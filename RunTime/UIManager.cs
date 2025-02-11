@@ -13,7 +13,7 @@ namespace DGames.Essentials.UI
 
         public T GetPanel<T>(string panelTag=null) where T : Panel => GetPanels<T>().FirstOrDefault(p=> string.IsNullOrEmpty(panelTag) || p.Tag == panelTag);
 
-        private IEnumerable<T> GetPanels<T>() where T : Panel
+        public IEnumerable<T> GetPanels<T>() where T : Panel
         {
             return Panels.OfType<T>();
         }
