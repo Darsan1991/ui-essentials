@@ -11,13 +11,17 @@ namespace DGames.Essentials.UI
 
         public IEnumerable<Panel> Panels => panels;
 
-        public T GetPanel<T>(string panelTag=null) where T : Panel => Panels.OfType<T>().FirstOrDefault(p=> string.IsNullOrEmpty(panelTag) || p.Tag == panelTag);
-        
-        
+        public T GetPanel<T>(string panelTag=null) where T : Panel => GetPanels<T>().FirstOrDefault(p=> string.IsNullOrEmpty(panelTag) || p.Tag == panelTag);
+
+        private IEnumerable<T> GetPanels<T>() where T : Panel
+        {
+            return Panels.OfType<T>();
+        }
+
 
         protected virtual void Awake()
         {
-            // panels.AddRange(GetComponentsInChildren<Panel>(true).Except(panels));
+            panels.AddRange(GetComponentsInChildren<Panel>(true).Except(panels));
             foreach (var panel in Panels)
             {
                 panel.Manager = this;

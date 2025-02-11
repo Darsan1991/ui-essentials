@@ -1,10 +1,12 @@
+using DGames.Essentials.Attributes;
 using UnityEngine;
 
 namespace DGames.Essentials.UI
 {
     public class Panel : ShowHidable
     {
-        [SerializeField] private string _tag;
+        [SerializeField] private bool _hasTag;
+        [Condition(nameof(_hasTag),true)][SerializeField] private string _tag;
 
         public string Tag => _tag;
         
